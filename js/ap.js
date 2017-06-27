@@ -43,14 +43,14 @@
 	
 	var heighName = document.createElement('span');
 	heighName.style.display = 'block';
-	heighName.innerHTML = 'Custom Height:';
+	heighName.innerHTML = 'Custom Brush Height:';
 	var heightcustom = document.createElement('input');
 	heightcustom.id = 'hight';
 	var br = document.createElement('br');
 	
 	var widthName = document.createElement('span');
 	widthName.style.display = 'block';
-	widthName.innerHTML = 'Custom Width:';
+	widthName.innerHTML = 'Custom Brush Width:';
 	var widthcustom = document.createElement('input');
 	widthcustom.id = 'width';
 	
@@ -64,12 +64,13 @@
 	customizer.appendChild(widthName);
 	customizer.appendChild(widthcustom);
 
-	
+	var canvasHeight = prompt('Height of your canvas:', 'in pixels');
+	var canvasWidth = prompt('Width of your canvas:', 'in pixels');
 
 	var canvas = document.createElement("div");
 	canvasArea.appendChild(canvas);
-	canvas.style.width = '400px';
-	canvas.style.height = '400px';
+	canvas.style.width = canvasHeight + 'px';
+	canvas.style.height = canvasWidth + 'px';
 	canvas.style.backgroundColor = 'lightgrey';
 	canvas.style.overflow = 'hidden';
 	canvas.style.position = 'relative';
@@ -87,10 +88,7 @@
 	
 		document.addEventListener("mousemove", function(click){
 			
-			
-			
-			
-			document.addEventListener("change", function() {
+			document.addEventListener("change", function() {	//	Custom brush size on empty fields
 				var yourHeight = document.getElementById('hight');
 				if (yourHeight.value === ''){
 					customheight = 10;
@@ -105,7 +103,8 @@
 				}
 			});
 			
-			
+
+
 			if (click.buttons !== 1) return;
 				var x = event.clientX;     // Get the horizontal coordinate
 				var y = event.clientY;     // Get the vertical coordinate
