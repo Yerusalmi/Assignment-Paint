@@ -12,34 +12,13 @@
 	
 	
 	
-	var red = document.createElement('button');
-	red.setAttribute('data-color', '0');
-	red.setAttribute('onClick', 'getColor(event);');
-	red.innerHTML = 'Red';
-	var blue = document.createElement('button');
-	blue.setAttribute('data-color', '1')
-	blue.setAttribute('onClick', 'getColor(event);');
-	blue.innerHTML = 'Blue';
-	var green = document.createElement('button');
-	green.setAttribute('data-color', '2')
-	green.setAttribute('onClick', 'getColor(event);');
-	green.innerHTML = 'Green';
-	var purple = document.createElement('button');
-	purple.setAttribute('data-color', '3')
-	purple.setAttribute('onClick', 'getColor(event);');
-	purple.innerHTML = 'Purple';
-	var orange = document.createElement('button');
-	orange.setAttribute('data-color', '4')
-	orange.setAttribute('onClick', 'getColor(event);');
-	orange.innerHTML = 'Orange';
-	
-	buttons.appendChild(red);
-	buttons.appendChild(blue);
-	buttons.appendChild(green);
-	buttons.appendChild(purple);
-	buttons.appendChild(orange);
 	var customizer = document.createElement('div');
 	customizer.id = 'customDetails';
+	
+	
+	var colorInput = document.createElement('input'); // color palatte
+	colorInput.type = 'color';
+	
 	
 	var heighName = document.createElement('span');
 	heighName.style.display = 'block';
@@ -57,34 +36,54 @@
 	
 	buttons.appendChild(customizer);
 	
-
+	customizer.appendChild(colorInput);
 	customizer.appendChild(heighName);
 	customizer.appendChild(heightcustom);
 	customizer.appendChild(br);
 	customizer.appendChild(widthName);
 	customizer.appendChild(widthcustom);
+	
+	var originalHeight;
+	var originalWidth;
 
-	var canvasHeight = prompt('Height of your canvas:', 'in pixels');
-	var canvasWidth = prompt('Width of your canvas:', 'in pixels');
+	var canvasHeight = prompt('Height of your canvas in pixels:', 'Default: 500');
+	var canvasWidth = prompt('Width of your canvas in pixels:', 'Default: 500');
+	var bgColor = prompt('Background Color: (default:white)', 'black,white,grey,lightgrey'); // BG color prompt
+	
+	if ((isNaN(canvasHeight)) || (canvasHeight < 500)) {
+		originalHeight = 500;
+		originalWidth = 500;
+	} else {
+		originalHeight = canvasHeight;
+		originalWidth = canvasWidth;
+	}
+	console.log(canvasHeight);
+	console.log(canvasWidth);
+	console.log(originalHeight);
+	console.log(originalWidth);
 
 	var canvas = document.createElement("div");
 	canvasArea.appendChild(canvas);
-	canvas.style.width = canvasHeight + 'px';
-	canvas.style.height = canvasWidth + 'px';
-	canvas.style.backgroundColor = 'lightgrey';
+	canvas.style.width = originalHeight + 'px';
+	canvas.style.height = originalWidth + 'px';
+	canvas.style.backgroundColor = bgColor;
 	canvas.style.overflow = 'hidden';
 	canvas.style.position = 'relative';
+	canvas.style.border = '1px solid black';
 	canvas.className = 'hello';
 
-	var colors = ['red','blue','green','purple','orange']
-	var t = 'black';
 	var customheight = 10;
 	var customwidth = 10;
 
-	function getColor(event) {
-			t = event.target.getAttribute('data-color'); 
-			console.log(t);
-		}
+		
+	// Eraser
+		    
+		 //   var eraser = document.getElementById('myEraser');
+		//    eraser.addEventListener("click", function(){
+			    
+			    
+			    
+			    
 	
 		document.addEventListener("mousemove", function(click){
 			
@@ -106,6 +105,10 @@
 
 
 			if (click.buttons !== 1) return;
+			if (click.buttons === 2) {
+				alert('sag click');
+				return;
+			}
 				var x = event.clientX;     // Get the horizontal coordinate
 				var y = event.clientY;     // Get the vertical coordinate
 				var coor = "X coords: " + x + ", Y coords: " + y;
@@ -118,10 +121,12 @@
 		    kare.style.height = customheight + 'px';
 		    kare.style.width = customwidth + 'px';
 		    kare.style.position = 'absolute';
-		    kare.style.backgroundColor = colors[t];
+		    kare.style.backgroundColor = colorInput.value;
 		    kare.style.top = y +'px';
 		    kare.style.left = x-10 +'px';
 		    kare.style.borderRadius = '50px'; // circle
+		    
+		    
 		 
 
 		});
